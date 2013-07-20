@@ -8,10 +8,12 @@ linked below, for an explanation of these paramters.
 How to use these modules
 ========================
 
-Each module contains four dictionaries: 
+Each module contains several dictionaries: 
+
 * Atoms
 * Bonds
 * Torsions
+* Impropers
 * VdWs  
 
 The dictionary **keys** correspond to the identifiers used in the reference 
@@ -37,13 +39,12 @@ for example:
 Each **value** in the dictionary is a *namedtuple* with fields for each type of
 parameter associated with the entity.  
 
-Atoms:    mass, comment
-Bonds:    k, r0, comment
-Angle:    k, theta0, comment
-Torsion:  bondpaths, Vn2, gamma, period, comment
-Improper: Vn2, gamma, period, comment
-Vdw:      R, epsilon, comment
-
+* Atoms:    mass, comment
+* Bonds:    k, r0, comment
+* Angle:    k, theta0, comment
+* Torsion:  bondpaths, Vn2, gamma, period, comment
+* Improper: Vn2, gamma, period, comment
+* Vdw:      R, epsilon, comment
 
 
 Import the module into your code.
