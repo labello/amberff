@@ -7,8 +7,24 @@ Amber force fields as Python modules.
 How to use these modules
 ========================
 
-import gaffparams
+Import the module into your code.
 
+    >>> import gaffparams
+
+Access the parameters of an atom, bond, torsion or non-bonded atom.
+
+    >>> gaffparams.Atoms
+    >>> mycarbon = gaffparams.Atoms['c']
+    >>> mycarbon.mass
+    12.01
+    >>> mycarbon.comment
+    'Sp2 C carbonyl group' 
+
+    >>> carbon_oxygen_bond = gaffparams.Bonds['c-o']
+    >>> carbon_oxygen_bond.k
+    648.0
+    >>> carbon_oxygen_bond.r0
+    1.214
 
 
 AMBER94
