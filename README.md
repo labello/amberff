@@ -1,30 +1,70 @@
 amberff
 =======
 
-These module files provide the complete parameters sets for the popular 
-Amber force fields as Python modules.
+These module files provide parameter sets for the popular 
+Amber force fields as Python modules. See the original references, 
+linked below, for an explanation of these paramters. 
 
 How to use these modules
 ========================
 
+Each module contains four dictionaries: 
+* Atoms
+* Bonds
+* Torsions
+* VdWs  
+
+The dictionary **keys** correspond to the identifiers used in the reference 
+paramter files. This amounts to the atom type, or the hyphen-separated
+atom types for angles and torsions. Spaces are removed.  
+
+
+Here are a few lines from parm94.dat,
+for example:
+
+    BR 79.90                !            bromine
+    C  12.01                             sp2 C carbonyl group
+    ...
+    C -CA  469.0    1.409       JCC,7,(1986),230; TYR
+    C -CB  447.0    1.419       JCC,7,(1986),230; GUA
+    ...
+    CB-C -NA    70.0      111.30    NA
+    CB-C -O     80.0      128.80
+    ...
+    X -C -CA-X    4   14.50        180.0             2.         intrpol.bsd.on C6H6
+    X -C -CB-X    4   12.00        180.0             2.         intrpol.bsd.on C6H6
+
+Each **value** in the dictionary is a *namedtuple* with fields for each type of
+parameter associated with the entity.  
+
+Atoms:    mass, comment
+Bonds:    k, r0, comment
+Angle:    k, theta0, comment
+Torsion:  bondpaths, Vn2, gamma, period, comment
+Improper: Vn2, gamma, period, comment
+Vdw:      R, epsilon, comment
+
+
+
 Import the module into your code.
 
-    >>> import gaffparams
+    >>> import amber94params 
 
-Access the parameters of an atom, bond, torsion or non-bonded atom.
-
-    >>> gaffparams.Atoms
-    >>> mycarbon = gaffparams.Atoms['c']
+    >>> mycarbon = gaffparams.Atoms['C']
     >>> mycarbon.mass
     12.01
     >>> mycarbon.comment
     'Sp2 C carbonyl group' 
 
-    >>> carbon_oxygen_bond = gaffparams.Bonds['c-o']
-    >>> carbon_oxygen_bond.k
-    648.0
-    >>> carbon_oxygen_bond.r0
-    1.214
+    >>> c_ca_bond = amber94params.Bonds['C-CA']
+    >>> c_ca_bond.k 
+    469.0 
+    >>> c_ca_bond.r0
+    1.409
+
+    >>> x_c_ca_x = amber94params.Torsions['X-C-CA-X']
+    >>> x_c_ca_x.gamma
+    180.0
 
 
 AMBER94
