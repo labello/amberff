@@ -8,6 +8,50 @@ linked below, for an explanation of these paramters.
 How to use these modules
 ========================
 
+Quickstart
+----------
+
+Import the module into your code.
+
+    >>> import gaffparams
+
+    >>> mycarbon = gaffparams.Atoms['c']
+    >>> mycarbon.mass
+    12.01
+    >>> mycarbon.comment
+    'Sp2 C carbonyl group'
+
+    >>> c_ca_bond = gaffparams.Bonds['c-ca']
+    >>> c_ca_bond.k
+    349.7
+    >>> c_ca_bond.r0
+    1.487
+    >>> c_ca_bond.comment
+    'SOURCE1     480\t0.0055'
+
+Torsion parameters sometimes have multiple terms, so a list of the Torsion objects are returned.
+
+    >>> tor = gaffparams.Torsions['hc-c3-c3-c']
+    >>> for term in tor:
+    ...     print term.bondpaths,term.Vn2,term.gamma
+    ...
+    1 0.16 0.0
+    1 0.0 0.0
+    1 0.25 0.0
+
+Attributes
+----------
+* Atoms:    mass, comment
+* Bonds:    k, r0, comment
+* Angle:    k, theta0, comment
+* Torsion:  bondpaths, Vn2, gamma, period, comment
+* Improper: Vn2, gamma, period, comment
+* Vdw:      R, epsilon, comment
+
+
+More Information
+----------------
+
 Each module contains several dictionaries: 
 
 * Atoms
@@ -47,33 +91,14 @@ parameter associated with the entity.
 * Vdw:      R, epsilon, comment
 
 
-Import the module into your code.
-
-    >>> import amber94params 
-
-    >>> mycarbon = gaffparams.Atoms['C']
-    >>> mycarbon.mass
-    12.01
-    >>> mycarbon.comment
-    'Sp2 C carbonyl group' 
-
-    >>> c_ca_bond = amber94params.Bonds['C-CA']
-    >>> c_ca_bond.k 
-    469.0 
-    >>> c_ca_bond.r0
-    1.409
-
-    >>> x_c_ca_x = amber94params.Torsions['X-C-CA-X']
-    >>> x_c_ca_x.gamma
-    180.0
-
-
 AMBER94
 -------
 
 *A Second Generation Force Field for the Simulation of Proteins, Nucleic Acids,
 and Organic Molecules*
 http://ffamber.cnsm.csulb.edu/pdfs/cornell_amber94_1995jacs.pdf
+
+Amber 94 not currently included
 
 GAFF
 ----
